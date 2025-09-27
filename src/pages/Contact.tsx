@@ -8,10 +8,9 @@ import { motion, Variants } from "framer-motion";
 export default function Contact() {
   const { theme } = useTheme();
 
-  // Variants now strictly typed
   const buttonVariants: Variants = {
     hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 }, // base visible state
+    visible: { opacity: 1, y: 0 },
     hover: {
       scale: 1.05,
       boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
@@ -23,7 +22,7 @@ export default function Contact() {
   const buttons = [
     { href: "mailto:your@email.com", label: "Email", icon: <Mail size={16} /> },
     { href: "https://github.com/kevinofficial95", label: "GitHub", icon: <Github size={16} /> },
-    { href: "https://linkedin.com/in/yourlinkedin", label: "LinkedIn", icon: <Linkedin size={16} /> },
+    { href: "https://linkedin.com/in/kevinjames95", label: "LinkedIn", icon: <Linkedin size={16} /> },
   ];
 
   return (
@@ -40,15 +39,35 @@ export default function Contact() {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
       >
-        <Container size="3">
-          <Card className="shadow-md p-6">
+        <Container
+          size="3"
+          style={{
+            maxWidth: "100%",
+            padding: "0 1rem",
+          }}
+        >
+          <Card
+            className="shadow-md p-6"
+            style={{
+              width: "100%",
+              maxWidth: "600px",
+              margin: "0 auto",
+            }}
+          >
             <Flex direction="column" gap="4" align="center">
-              <Text size="7" weight="bold">Get In Touch</Text>
+              <Text size="7" weight="bold" align="center">
+                Get In Touch
+              </Text>
               <Text size="4" color="gray" align="center">
                 Open to new opportunities, collaborations, and projects. Let’s connect 👇
               </Text>
 
-              <Flex gap="3" mt="4">
+              <Flex
+                gap="3"
+                mt="4"
+                wrap="wrap" 
+                justify="center"
+              >
                 {buttons.map((btn, i) => (
                   <motion.div
                     key={btn.label}
