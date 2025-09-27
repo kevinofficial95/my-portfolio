@@ -16,3 +16,13 @@ a {
   text-decoration: none;
   color: inherit;
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  scroll-margin-top: 80px; /* equal to navbar height */
+}
+
+
