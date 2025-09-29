@@ -20,7 +20,7 @@ export default function Contact() {
   };
 
   const buttons = [
-    { href: "mailto:your@email.com", label: "Email", icon: <Mail size={16} /> },
+    { href: "mailto:kevinofficial95@gmail.com", label: "Email", icon: <Mail size={16} /> },
     { href: "https://github.com/kevinofficial95", label: "GitHub", icon: <Github size={16} /> },
     { href: "https://linkedin.com/in/kevinjames95", label: "LinkedIn", icon: <Linkedin size={16} /> },
   ];

@@ -1,36 +1,17 @@
-import { Container, Flex, Text, Button, Card } from "@radix-ui/themes";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Container, Flex, Text, Button, Card, Heading } from "@radix-ui/themes";
 import PageWrapper from "../components/PageWrapper";
 import { useTheme } from "../context/ThemeContext";
 import { backgrounds } from "../utils/backgrounds";
-import { motion, Variants } from "framer-motion";
+import { motion } from "framer-motion";
 
-export default function Contact() {
+export default function About() {
   const { theme } = useTheme();
-
-  // Motion button variants
-  const buttonVariants: Variants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0 },
-    hover: {
-      scale: 1.05,
-      boxShadow: "0px 4px 12px rgba(0,0,0,0.2)",
-      transition: { type: "spring", stiffness: 300 },
-    },
-    tap: { scale: 0.95 },
-  };
-
-  const buttons = [
-    { href: "mailto:your@email.com", label: "Email", icon: <Mail size={16} /> },
-    { href: "https://github.com/kevinofficial95", label: "GitHub", icon: <Github size={16} /> },
-    { href: "https://linkedin.com/in/yourlinkedin", label: "LinkedIn", icon: <Linkedin size={16} /> },
-  ];
 
   return (
     <PageWrapper>
       <motion.div
         style={{
-          background: backgrounds[theme].contact,
+          background: backgrounds[theme].about, // 👈 use a different background key
           minHeight: "70vh",
           padding: "80px 0",
           display: "flex",
@@ -44,53 +25,63 @@ export default function Contact() {
           size="3"
           style={{
             maxWidth: "100%",
-            padding: "0 1rem", // ensures breathing room on mobile
+            padding: "0 1rem",
           }}
         >
           <Card
             className="shadow-md p-6"
             style={{
               width: "100%",
-              maxWidth: "600px", // keeps card centered
+              maxWidth: "900px", // wider than Contact
               margin: "0 auto",
             }}
           >
-            <Flex direction="column" gap="4" align="center">
-              <Text size="7" weight="bold" align="center">
-                Get In Touch
-              </Text>
-              <Text size="4" color="gray" align="center">
-                Open to new opportunities, collaborations, and projects. Let’s connect 👇
-              </Text>
+            <Flex
+              direction={{ initial: "column", md: "row" }} // stack on mobile
+              gap="6"
+              align="center"
+            >
+              {/* Left side: Profile Image */}
+              <motion.img
+                src="/mypic.jpeg" // replace with your profile image
+                alt="Kevin James"
+                style={{
+                  width: "180px",
+                  height: "180px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                  boxShadow: "0px 4px 12px rgba(0,0,0,0.15)",
+                }}
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.6 }}
+              />
 
-              {/* Button row */}
-              <Flex
-                gap="3"
-                mt="4"
-                wrap="wrap"
-                justify="center" // keeps centered on mobile
-              >
-                {buttons.map((btn, i) => (
-                  <motion.div
-                    key={btn.label}
-                    variants={buttonVariants}
-                    initial="hidden"
-                    animate="visible"
-                    whileHover="hover"
-                    whileTap="tap"
-                    transition={{
-                      delay: i * 0.2,
-                      type: "spring",
-                      stiffness: 200,
-                    }}
-                  >
-                    <Button asChild variant={i === 2 ? "soft" : "solid"}>
-                      <a href={btn.href} target="_blank" rel="noreferrer">
-                        {btn.icon} {btn.label}
-                      </a>
-                    </Button>
-                  </motion.div>
-                ))}
+              {/* Right side: Bio */}
+              <Flex direction="column" gap="3" style={{ flex: 1 }}>
+                <Heading size="6" weight="bold">
+                  About Me
+                </Heading>
+                <Text size="4" color="gray">
+                  Hi 👋 I’m Kevin James, a passionate software developer from Newport,
+                  UK. I specialize in building scalable web applications with
+                  **React, TypeScript, and Node.js**.
+                </Text>
+                <Text size="4" color="gray">
+                  With experience in frontend and backend development, I enjoy solving
+                  real-world problems and creating modern, responsive user experiences.
+                </Text>
+
+                <Flex gap="3" mt="3" wrap="wrap">
+                  <Button asChild>
+                    <a href="/Kevin_James_CV.pdf" download>
+                      Download CV
+                    </a>
+                  </Button>
+                  <Button variant="soft" asChild>
+                    <a href="/contact">Let’s Connect</a>
+                  </Button>
+                </Flex>
               </Flex>
             </Flex>
           </Card>
