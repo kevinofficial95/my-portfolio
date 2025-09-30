@@ -4,18 +4,29 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { backgrounds } from "../utils/backgrounds";
-import { Download } from "lucide-react";
+import { Download, Eye } from "lucide-react";
 
 export default function Home() {
   const words = ["React Developer", "DevOps Enthusiast", "Cloud Learner 🚀"];
   const [index, setIndex] = useState(0);
   const { theme } = useTheme();
 
+  // 👀 Visitor counter state
+  const [visits, setVisits] = useState<number | null>(null);
+
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, 2000);
     return () => clearInterval(interval);
+  }, []);
+
+  // Fetch visitor count from Azure Function
+  useEffect(() => {
+    fetch("/api/visitorCounter")
+      .then((res) => res.json())
+      .then((data) => setVisits(data.count))
+      .catch(() => setVisits(null));
   }, []);
 
   return (
@@ -34,14 +45,18 @@ export default function Home() {
       >
         <Container size="3">
           <Flex direction="column" align="center" gap="6">
+            {/* Intro */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Text size="9" weight="bold">Hi, I’m Kevin 👋</Text>
+              <Text size="9" weight="bold">
+                Hi, I’m Kevin 👋
+              </Text>
             </motion.div>
 
+            {/* Rotating titles */}
             <motion.div
               key={index}
               initial={{ opacity: 0 }}
@@ -58,6 +73,31 @@ export default function Home() {
                 <Download size={16} /> Download CV
               </a>
             </Button>
+
+            {/* Visitor Counter Badge */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+              style={{ marginTop: "16px" }}
+            >
+              <Button
+                variant="outline"
+                size="2"
+                style={{
+                  borderRadius: "9999px", // pill shape
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "6px",
+                  cursor: "default",
+                }}
+              >
+                <Eye size={16} />
+                {visits !== null
+                  ? `${visits} visitors`
+                  : "Loading..."}
+              </Button>
+            </motion.div>
           </Flex>
         </Container>
       </motion.div>
