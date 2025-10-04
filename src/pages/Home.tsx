@@ -7,7 +7,7 @@ import { backgrounds } from "../utils/backgrounds";
 import { Download } from "lucide-react";
 
 export default function Home() {
-  const words = ["React Developer", "DevOps Enthusiast", "Cloud Learner 🚀"];
+  const words = ["React Developer", "DevOps Enthusiast", "Cloud Learner", "TypeScript Fan", "Open Source Contributor", "NodeJS Expert","SQL Pro"];
   const [index, setIndex] = useState(0);
   const { theme } = useTheme();
 
@@ -40,7 +40,7 @@ export default function Home() {
               transition={{ duration: 0.8 }}
             >
               <Text size="9" weight="bold">
-                Hi, I’m Kevin 👋
+                Hi, I’m Kevin James
               </Text>
             </motion.div>
 
@@ -80,7 +80,7 @@ export default function Home() {
                   cursor: "default",
                 }}
               >
-                Version Number : 1.1.0
+                Version Number : 1.2.0
               </Button>
             </motion.div>
           </Flex>

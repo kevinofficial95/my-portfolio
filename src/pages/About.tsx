@@ -62,7 +62,7 @@ export default function About() {
                   About Me
                 </Heading>
                 <Text size="4" color="gray">
-                  Hi 👋 I’m Kevin James, a passionate software developer from Newport,
+                  Hi I’m Kevin James, a passionate software developer from Newport,
                   UK. I specialize in building scalable web applications with
                   **React, TypeScript, and Node.js**.
                 </Text>
