@@ -34,7 +34,6 @@ export default function Home() {
       >
         <Container size="3">
           <Flex direction="column" align="center" gap="6">
-            {/* Intro */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -74,14 +73,14 @@ export default function Home() {
                 variant="outline"
                 size="2"
                 style={{
-                  borderRadius: "9999px", // pill shape
+                  borderRadius: "9999px",
                   display: "flex",
                   alignItems: "center",
                   gap: "6px",
                   cursor: "default",
                 }}
               >
-                Version Number : 1.0.0
+                Version Number : 1.1.0
               </Button>
             </motion.div>
           </Flex>

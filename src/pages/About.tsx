@@ -11,7 +11,7 @@ export default function About() {
     <PageWrapper>
       <motion.div
         style={{
-          background: backgrounds[theme].about, // 👈 use a different background key
+          background: backgrounds[theme].about,
           minHeight: "70vh",
           padding: "80px 0",
           display: "flex",
@@ -32,18 +32,17 @@ export default function About() {
             className="shadow-md p-6"
             style={{
               width: "100%",
-              maxWidth: "900px", // wider than Contact
+              maxWidth: "900px",
               margin: "0 auto",
             }}
           >
             <Flex
-              direction={{ initial: "column", md: "row" }} // stack on mobile
+              direction={{ initial: "column", md: "row" }}
               gap="6"
               align="center"
             >
-              {/* Left side: Profile Image */}
               <motion.img
-                src="/mypic.jpeg" // replace with your profile image
+                src="/mypic.jpeg"
                 alt="Kevin James"
                 style={{
                   width: "180px",

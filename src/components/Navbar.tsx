@@ -32,7 +32,6 @@ export default function Navbar() {
             <Button key={item.path} asChild variant="ghost" style={{ position: "relative" }}>
               <Link to={item.path}>
                 {item.label}
-                {/* Animated underline */}
                 <motion.div
                   layoutId="underline"
                   initial={false}
@@ -54,8 +53,6 @@ export default function Navbar() {
             </Button>
           );
         })}
-
-        {/* Animated Theme Toggle */}
         <IconButton variant="soft" onClick={toggleTheme}>
           <AnimatePresence mode="wait" initial={false}>
             {theme === "light" ? (

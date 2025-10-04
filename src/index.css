@@ -22,7 +22,7 @@ html {
 }
 
 section {
-  scroll-margin-top: 80px; /* equal to navbar height */
+  scroll-margin-top: 80px;
 }
 
 @media (max-width: 768px) {
