@@ -81,6 +81,7 @@ export default function Home() {
                   cursor: "default",
                 }}
               >
+                Version Number : 1.0.0
               </Button>
             </motion.div>
           </Flex>
