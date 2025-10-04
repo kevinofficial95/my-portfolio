@@ -4,29 +4,18 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useTheme } from "../context/ThemeContext";
 import { backgrounds } from "../utils/backgrounds";
-import { Download, Eye } from "lucide-react";
+import { Download } from "lucide-react";
 
 export default function Home() {
   const words = ["React Developer", "DevOps Enthusiast", "Cloud Learner 🚀"];
   const [index, setIndex] = useState(0);
   const { theme } = useTheme();
 
-  // 👀 Visitor counter state
-  const [visits, setVisits] = useState<number | null>(null);
-
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % words.length);
     }, 2000);
     return () => clearInterval(interval);
-  }, []);
-
-  // Fetch visitor count from Azure Function
-  useEffect(() => {
-    fetch("/api/visitorCounter")
-      .then((res) => res.json())
-      .then((data) => setVisits(data.count))
-      .catch(() => setVisits(null));
   }, []);
 
   return (
@@ -92,10 +81,6 @@ export default function Home() {
                   cursor: "default",
                 }}
               >
-                <Eye size={16} />
-                {visits !== null
-                  ? `${visits} visitors`
-                  : "Loading..."}
               </Button>
             </motion.div>
           </Flex>
