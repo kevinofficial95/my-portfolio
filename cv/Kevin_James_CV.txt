@@ -1,0 +1,73 @@
+KEVIN JAMES
+Software Engineer | React, TypeScript, Node.js | Cloud & DevOps
+
+Newport, UK
+Email: kevinofficial95@gmail.com
+Website: https://www.kevinjames.dev
+LinkedIn: https://linkedin.com/in/kevinjames95
+GitHub: https://github.com/kevinofficial95
+
+PROFESSIONAL SUMMARY
+Product-focused Software Engineer with hands-on experience building and deploying
+full-stack web applications using React, TypeScript, and Node.js. Strong in
+frontend architecture, API development, and cloud delivery with Google Cloud.
+Built and hosted a production portfolio on Google Cloud Run with custom domain
+routing, managed SSL, Dockerized builds, and CI/CD automation through GitHub
+Actions, including monitoring alerts and budget controls.
+
+CORE SKILLS
+Frontend: React 19, React Native, Expo, TypeScript, Vite, Radix UI, Framer Motion, Responsive Design
+Backend: Node.js, Express, REST APIs, TypeORM, SQL
+Cloud & DevOps: Google Cloud Run, Cloud SQL, Docker, Cloud Build, GitHub
+Actions, CI/CD, Custom Domain Mapping, Managed SSL, Nginx, Monitoring Alerts,
+GCP Budgets, Auto Scaling, Instance Strategy
+Tools: Git, VS Code, Vitest, Figma, App Store Connect, Google Play Console
+
+SELECTED PROJECT EXPERIENCE
+
+Portfolio Platform (www.kevinjames.dev) | React + TypeScript + Cloud Run
+- Rebuilt and modernized personal portfolio with animated UI sections, improved
+  information hierarchy, and recruiter-friendly contact workflows.
+- Hosted production portfolio on Google Cloud Run and configured custom domain
+  mapping for www.kevinjames.dev.
+- Implemented Docker-based deployment flow with Nginx SPA routing support.
+- Set up Cloud Build pipeline and GitHub Actions workflow for automated deploys
+  on push to main branch.
+- Configured Workload Identity Federation and service account IAM for secure,
+  keyless GitHub-to-GCP deployment.
+- Configured monitoring alerts and budget thresholds in GCP for proactive
+  reliability and cost visibility.
+- Applied scalable architecture practices using Cloud Run instance controls and
+  Cloud SQL integration patterns.
+
+Church Circle App | Full-Stack Mobile + Web Product
+- Built and enhanced platform modules focused on community and church
+  workflow management.
+- Developed cross-platform experiences using React Native and Expo.
+- Supported release process for App Store and Play Store distribution.
+- Delivered API integrations, authentication/authorization flows, and database-
+  backed business logic using Node.js ecosystem tooling.
+- Contributed to reliable cloud deployment and operational improvements for
+  maintainability and release speed.
+
+Frontend Systems and UX Engineering
+- Developed modular React component structures to support scale and easier
+  maintenance.
+- Added motion-driven interactions and route transitions to improve user
+  experience without sacrificing performance.
+- Designed clear case-study style project presentation focused on business value,
+  architecture, and implementation quality.
+
+IMPACT HIGHLIGHTS
+- Production-grade hosting established on Google Cloud Run with secure CI/CD.
+- Production domain and SSL restored successfully after prior hosting outage.
+- Automated deployment workflow established to reduce manual release effort.
+- Portfolio positioned with stronger recruiter conversion via structured contact
+  form and project storytelling.
+
+ADDITIONAL INFORMATION
+- Open to Software Engineer roles focused on React, TypeScript, Node.js, and
+  cloud-native product development.
+- Available for remote or hybrid opportunities.
+
+References available on request.

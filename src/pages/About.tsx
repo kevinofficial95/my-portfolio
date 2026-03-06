@@ -73,8 +73,8 @@ export default function About() {
 
                 <Flex gap="3" mt="3" wrap="wrap">
                   <Button asChild>
-                    <a href="/Kevin_James_CV.pdf" download>
-                      Download CV
+                    <a href="/Kevin_James_CV.html" target="_blank" rel="noreferrer">
+                      View CV
                     </a>
                   </Button>
                   <Button variant="soft" asChild>

@@ -6,7 +6,7 @@ export interface SkillCategory {
 export const skills: SkillCategory[] = [
   {
     category: "Frontend",
-    items: ["React 19", "TypeScript", "Radix UI", "Vite"]
+    items: ["React 19", "React Native", "Expo", "TypeScript", "Radix UI", "Vite"]
   },
   {
     category: "Backend",
@@ -14,10 +14,10 @@ export const skills: SkillCategory[] = [
   },
   {
     category: "Cloud & DevOps",
-    items: ["Azure", "Google Cloud", "Docker", "GitHub Actions", "CI/CD"]
+    items: ["Google Cloud", "Cloud Run", "Cloud SQL", "Docker", "GitHub Actions", "Cloud Build", "CI/CD", "Monitoring Alerts", "Budgets", "Auto Scaling", "Nginx"]
   },
   {
     category: "Tools",
-    items: ["Git", "VS Code", "Vitest", "Figma"]
+    items: ["Git", "VS Code", "Vitest", "Figma", "App Store Connect", "Google Play Console"]
   }
 ];

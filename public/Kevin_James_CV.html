@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kevin James | CV</title>
+    <style>
+      :root {
+        --bg: #f3f7fb;
+        --paper: #ffffff;
+        --ink: #0f172a;
+        --muted: #475569;
+        --accent: #0f766e;
+        --chip: #e6fffb;
+        --line: #dbe3ec;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 40px 16px;
+        font-family: "Manrope", "Segoe UI", Roboto, sans-serif;
+        background:
+          radial-gradient(circle at 20% 0%, #e0f2fe 0%, transparent 40%),
+          radial-gradient(circle at 80% 10%, #ccfbf1 0%, transparent 40%),
+          var(--bg);
+        color: var(--ink);
+      }
+
+      .sheet {
+        width: min(980px, 100%);
+        margin: 0 auto;
+        background: var(--paper);
+        border-radius: 18px;
+        border: 1px solid var(--line);
+        box-shadow: 0 30px 70px rgba(15, 23, 42, 0.12);
+        overflow: hidden;
+      }
+
+      .hero {
+        padding: 36px 40px 24px;
+        background: linear-gradient(135deg, #0f172a 0%, #134e4a 100%);
+        color: #f8fafc;
+      }
+
+      .name {
+        margin: 0;
+        font-size: clamp(2rem, 4vw, 2.9rem);
+        line-height: 1.04;
+        letter-spacing: -0.02em;
+      }
+
+      .role {
+        margin-top: 8px;
+        color: #cbd5e1;
+        font-size: 1rem;
+      }
+
+      .meta {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .meta span {
+        font-size: 0.86rem;
+        color: #e2e8f0;
+        background: rgba(255, 255, 255, 0.12);
+        padding: 7px 11px;
+        border-radius: 999px;
+      }
+
+      .content {
+        display: grid;
+        grid-template-columns: 1.05fr 1.75fr;
+        gap: 0;
+      }
+
+      .left,
+      .right {
+        padding: 28px 30px;
+      }
+
+      .left {
+        background: #f8fafc;
+        border-right: 1px solid var(--line);
+      }
+
+      .section {
+        margin-bottom: 26px;
+      }
+
+      .section:last-child {
+        margin-bottom: 0;
+      }
+
+      h2 {
+        margin: 0 0 10px;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: #0f766e;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      ul {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+      }
+
+      li {
+        margin-bottom: 8px;
+        line-height: 1.45;
+      }
+
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .chip {
+        background: var(--chip);
+        border: 1px solid #9ee4d8;
+        color: #115e59;
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      .entry {
+        margin-bottom: 18px;
+        padding-bottom: 18px;
+        border-bottom: 1px dashed var(--line);
+      }
+
+      .entry:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .entry h3 {
+        margin: 0 0 5px;
+        font-size: 1.06rem;
+      }
+
+      .entry .sub {
+        margin-bottom: 8px;
+        color: #0f766e;
+        font-size: 0.88rem;
+        font-weight: 700;
+      }
+
+      .print-bar {
+        display: flex;
+        justify-content: flex-end;
+        width: min(980px, 100%);
+        margin: 0 auto 10px;
+      }
+
+      .print-btn {
+        border: 1px solid #0f766e;
+        background: #ffffff;
+        color: #0f766e;
+        border-radius: 10px;
+        font-weight: 700;
+        padding: 8px 12px;
+        cursor: pointer;
+      }
+
+      @media (max-width: 860px) {
+        .content {
+          grid-template-columns: 1fr;
+        }
+
+        .left {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+      }
+
+      @media print {
+        body {
+          padding: 0;
+          background: #fff;
+        }
+
+        .print-bar {
+          display: none;
+        }
+
+        .sheet {
+          width: 100%;
+          border-radius: 0;
+          border: 0;
+          box-shadow: none;
+        }
+
+        .hero {
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="print-bar">
+      <button class="print-btn" onclick="window.print()">Save as PDF</button>
+    </div>
+
+    <main class="sheet">
+      <header class="hero">
+        <h1 class="name">Kevin James</h1>
+        <p class="role">Software Engineer | React, TypeScript, Node.js | Cloud & DevOps</p>
+        <div class="meta">
+          <span>Newport, UK</span>
+          <span>kevinofficial95@gmail.com</span>
+          <span>www.kevinjames.dev</span>
+          <span>github.com/kevinofficial95</span>
+          <span>linkedin.com/in/kevinjames95</span>
+        </div>
+      </header>
+
+      <section class="content">
+        <aside class="left">
+          <div class="section">
+            <h2>Core Skills</h2>
+            <div class="chips">
+              <span class="chip">React 19</span>
+              <span class="chip">React Native</span>
+              <span class="chip">Expo</span>
+              <span class="chip">TypeScript</span>
+              <span class="chip">Node.js</span>
+              <span class="chip">Express</span>
+              <span class="chip">REST APIs</span>
+              <span class="chip">TypeORM</span>
+              <span class="chip">SQL</span>
+              <span class="chip">Google Cloud</span>
+              <span class="chip">Cloud Run</span>
+              <span class="chip">Cloud SQL</span>
+              <span class="chip">Docker</span>
+              <span class="chip">GitHub Actions</span>
+              <span class="chip">Cloud Build</span>
+              <span class="chip">CI/CD</span>
+              <span class="chip">Nginx</span>
+              <span class="chip">Monitoring Alerts</span>
+              <span class="chip">GCP Budgets</span>
+              <span class="chip">Auto Scaling</span>
+              <span class="chip">Vite</span>
+              <span class="chip">Framer Motion</span>
+              <span class="chip">Radix UI</span>
+              <span class="chip">App Store Connect</span>
+              <span class="chip">Google Play Console</span>
+            </div>
+          </div>
+
+          <div class="section">
+            <h2>Highlights</h2>
+            <ul>
+              <li>Hosted production portfolio on Google Cloud Run.</li>
+              <li>Configured GCP monitoring alerts and cost budgets.</li>
+              <li>Applied Cloud SQL, instance strategy, and scaling architecture patterns.</li>
+              <li>Set up domain mapping + managed SSL for live custom domain.</li>
+              <li>Implemented Dockerized CI/CD deployment pipeline with GitHub Actions.</li>
+              <li>Built recruiter-friendly contact funnel and case-study UX.</li>
+            </ul>
+          </div>
+
+          <div class="section">
+            <h2>Open To</h2>
+            <p>Software Engineer roles focused on React, TypeScript, Node.js, and cloud-native product development.</p>
+          </div>
+        </aside>
+
+        <article class="right">
+          <div class="section">
+            <h2>Professional Summary</h2>
+            <p>
+              Product-focused Software Engineer with practical end-to-end experience in building, shipping, and
+              operating modern web applications. Strong in frontend architecture, API delivery, and cloud operations.
+              Built and hosted production-ready portfolio infrastructure on Google Cloud Run with scalable design,
+              monitoring alerts, budget controls, and secure deployment workflows.
+            </p>
+          </div>
+
+          <div class="section">
+            <h2>Selected Project Experience</h2>
+
+            <div class="entry">
+              <h3>Portfolio Platform on Google Cloud</h3>
+              <div class="sub">React + TypeScript + Cloud Run</div>
+              <ul>
+                <li>Hosted portfolio on Google Cloud Run with production-grade configuration.</li>
+                <li>Configured custom domain routing (`www.kevinjames.dev`) and managed SSL issuance.</li>
+                <li>Implemented Docker + Nginx SPA container strategy for reliable production delivery.</li>
+                <li>Created GitHub Actions workflow to deploy on push to `main` via Cloud Build.</li>
+                <li>Applied cost controls with GCP budgets and alerting to monitor spend and service health.</li>
+                <li>Designed scaling-aware architecture using Cloud Run instance controls and Cloud SQL integration patterns.</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <h3>Church Circle Mobile App</h3>
+              <div class="sub">Full-Stack Product Engineering</div>
+              <ul>
+                <li>Built and improved API-backed mobile workflows for real-world church/community use cases.</li>
+                <li>Delivered cross-platform app experiences using React Native and Expo.</li>
+                <li>Prepared and maintained release process for Apple App Store and Google Play Store availability.</li>
+                <li>Implemented backend modules and frontend integrations for scalable operations.</li>
+                <li>Contributed to release reliability and maintainability through structured deployment practices.</li>
+              </ul>
+            </div>
+
+            <div class="entry">
+              <h3>Frontend Systems and UX Motion</h3>
+              <div class="sub">Design-Driven Engineering</div>
+              <ul>
+                <li>Developed reusable React component architecture for faster iteration and consistency.</li>
+                <li>Added purposeful motion and section choreography for premium user experience.</li>
+                <li>Restructured content into recruiter-facing case studies with clear value communication.</li>
+              </ul>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

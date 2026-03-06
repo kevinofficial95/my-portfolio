@@ -1,12 +1,30 @@
-/* Reset and global styles */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
+:root {
+  --text-light: #0f172a;
+  --text-muted-light: #475467;
+  --surface-light: rgba(255, 255, 255, 0.72);
+  --border-light: #eaecf0;
+  --text-dark: #f8fafc;
+  --text-muted-dark: #98a2b3;
+  --surface-dark: rgba(15, 23, 42, 0.6);
+  --border-dark: #344054;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+}
+
 body {
-  font-family: system-ui, sans-serif;
+  font-family: "Manrope", sans-serif;
   background: var(--gray-1);
   color: var(--gray-12);
   transition: background 0.3s ease, color 0.3s ease;
@@ -25,15 +43,67 @@ section {
   scroll-margin-top: 80px;
 }
 
-@media (max-width: 768px) {
-  .responsive-container {
-    padding: 1rem !important;
-  }
-  .responsive-flex {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+.site-nav-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+  padding: 12px 14px;
+  backdrop-filter: blur(10px);
 }
 
+.site-nav {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border-light);
+  background: var(--surface-light);
+  box-shadow: 0 12px 30px rgba(16, 24, 40, 0.08);
+}
 
+.site-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
 
+.site-brand-sub {
+  color: var(--text-muted-light);
+  letter-spacing: 0.03em;
+}
+
+.nav-item-btn {
+  font-weight: 700;
+}
+
+.theme-btn {
+  border: 1px solid var(--border-light);
+}
+
+.dark .site-nav,
+[data-theme="dark"] .site-nav {
+  border-color: var(--border-dark);
+  background: var(--surface-dark);
+  box-shadow: none;
+}
+
+.dark .site-brand-sub,
+[data-theme="dark"] .site-brand-sub {
+  color: var(--text-muted-dark);
+}
+
+.dark .theme-btn,
+[data-theme="dark"] .theme-btn {
+  border-color: var(--border-dark);
+}
+
+@media (max-width: 900px) {
+  .site-nav {
+    padding: 10px;
+    gap: 8px;
+  }
+
+  .site-brand-sub {
+    display: none;
+  }
+}
