@@ -1,0 +1,45 @@
+name: Deploy to Google Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Set up gcloud
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+
+      - name: Ensure Artifact Registry repository exists
+        run: |
+          gcloud artifacts repositories describe web \
+            --location=${{ secrets.GCP_REGION }} \
+            || gcloud artifacts repositories create web \
+              --repository-format=docker \
+              --location=${{ secrets.GCP_REGION }} \
+              --description="Docker images for my-portfolio"
+
+      - name: Build and deploy
+        run: |
+          gcloud builds submit \
+            --project=${{ secrets.GCP_PROJECT_ID }} \
+            --config=cloudbuild.yaml \
+            --substitutions=_REGION=${{ secrets.GCP_REGION }},_SERVICE_NAME=my-portfolio

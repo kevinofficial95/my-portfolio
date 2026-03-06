@@ -1,73 +1,93 @@
-# React + TypeScript + Vite
+# Kevin James Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + TypeScript + Vite portfolio site, deployed on Google Cloud Run.
 
-Currently, two official plugins are available:
+## Local development
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Build
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run build
 ```
+
+## Deploy to Google Cloud Run (one-time setup)
+
+1. Create/select your GCP project and set defaults:
+
+```bash
+gcloud auth login
+gcloud config set project YOUR_GCP_PROJECT_ID
+gcloud config set run/region us-central1
+```
+
+2. Enable required APIs:
+
+```bash
+gcloud services enable run.googleapis.com cloudbuild.googleapis.com artifactregistry.googleapis.com
+```
+
+3. Create Artifact Registry repository:
+
+```bash
+gcloud artifacts repositories create web \
+  --repository-format=docker \
+  --location=us-central1 \
+  --description="Docker images for my-portfolio"
+```
+
+4. Deploy:
+
+```bash
+gcloud builds submit --config cloudbuild.yaml
+```
+
+5. Get your service URL:
+
+```bash
+gcloud run services describe my-portfolio \
+  --region=us-central1 \
+  --format='value(status.url)'
+```
+
+## Connect `www.kevinjames.dev`
+
+1. Map the domain to Cloud Run:
+
+```bash
+gcloud run domain-mappings create \
+  --service=my-portfolio \
+  --domain=www.kevinjames.dev \
+  --region=us-central1
+```
+
+2. Show DNS records Google requires:
+
+```bash
+gcloud run domain-mappings describe \
+  --domain=www.kevinjames.dev \
+  --region=us-central1
+```
+
+3. Add the listed `CNAME`/`A`/`AAAA` records at your DNS provider.
+
+4. Wait for SSL provisioning (usually minutes, can take longer) and verify:
+
+```bash
+curl -I https://www.kevinjames.dev
+```
+
+## GitHub Actions deployment
+
+This repo includes `.github/workflows/deploy-gcp-cloud-run.yml` for deploy-on-push to `main`.
+
+Set these repository secrets:
+
+- `GCP_PROJECT_ID`
+- `GCP_REGION` (for example `us-central1`)
+- `GCP_WORKLOAD_IDENTITY_PROVIDER`
+- `GCP_SERVICE_ACCOUNT`

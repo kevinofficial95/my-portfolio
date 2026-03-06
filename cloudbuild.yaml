@@ -1,0 +1,31 @@
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "build"
+      - "-t"
+      - "${_REGION}-docker.pkg.dev/$PROJECT_ID/web/my-portfolio:$BUILD_ID"
+      - "."
+
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - "push"
+      - "${_REGION}-docker.pkg.dev/$PROJECT_ID/web/my-portfolio:$BUILD_ID"
+
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: gcloud
+    args:
+      - "run"
+      - "deploy"
+      - "${_SERVICE_NAME}"
+      - "--image=${_REGION}-docker.pkg.dev/$PROJECT_ID/web/my-portfolio:$BUILD_ID"
+      - "--region=${_REGION}"
+      - "--platform=managed"
+      - "--allow-unauthenticated"
+      - "--port=8080"
+
+images:
+  - "${_REGION}-docker.pkg.dev/$PROJECT_ID/web/my-portfolio:$BUILD_ID"
+
+substitutions:
+  _SERVICE_NAME: "my-portfolio"
+  _REGION: "us-central1"
