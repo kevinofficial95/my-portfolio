@@ -39,7 +39,28 @@ jobs:
 
       - name: Build and deploy
         run: |
-          gcloud builds submit \
+          BUILD_ID=$(gcloud builds submit \
             --project=${{ secrets.GCP_PROJECT_ID }} \
             --config=cloudbuild.yaml \
-            --substitutions=_REGION=${{ secrets.GCP_REGION }},_SERVICE_NAME=my-portfolio
+            --substitutions=_REGION=${{ secrets.GCP_REGION }},_SERVICE_NAME=my-portfolio \
+            --async \
+            --format='value(id)')
+
+          echo "Cloud Build ID: $BUILD_ID"
+
+          while true; do
+            STATUS=$(gcloud builds describe "$BUILD_ID" --project=${{ secrets.GCP_PROJECT_ID }} --format='value(status)')
+            echo "Build status: $STATUS"
+
+            if [ "$STATUS" = "SUCCESS" ]; then
+              break
+            fi
+
+            if [ "$STATUS" = "FAILURE" ] || [ "$STATUS" = "CANCELLED" ] || [ "$STATUS" = "TIMEOUT" ] || [ "$STATUS" = "EXPIRED" ]; then
+              echo "Cloud Build failed with status: $STATUS"
+              gcloud builds describe "$BUILD_ID" --project=${{ secrets.GCP_PROJECT_ID }}
+              exit 1
+            fi
+
+            sleep 10
+          done
