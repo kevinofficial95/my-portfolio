@@ -15,7 +15,8 @@ const CinematicPage = lazy(
 
 function App() {
   const location = useLocation();
-  const isCinematic = location.pathname === "/3d";
+  const isCinematic =
+    location.pathname === "/" || location.pathname === "/3d";
 
   if (isCinematic) {
     return (
@@ -30,10 +31,10 @@ function App() {
       <Navbar />
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/skills" element={<Skills />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
+          <Route path="/classic" element={<Home />} />
+          <Route path="/classic/skills" element={<Skills />} />
+          <Route path="/classic/about" element={<About />} />
+          <Route path="/classic/contact" element={<Contact />} />
         </Routes>
       </AnimatePresence>
       <Footer />

@@ -9,16 +9,16 @@ export default function Navbar() {
   const location = useLocation();
 
   const navItems = [
-    { path: "/", label: "Home" },
-    { path: "/skills", label: "Skills" },
-    { path: "/about", label: "About" },
-    { path: "/contact", label: "Contact" },
+    { path: "/classic", label: "Home" },
+    { path: "/classic/skills", label: "Skills" },
+    { path: "/classic/about", label: "About" },
+    { path: "/classic/contact", label: "Contact" },
   ];
 
   return (
     <Box className="site-nav-wrap">
       <Flex justify="between" align="center" className="site-nav">
-        <Link to="/" className="site-brand">
+        <Link to="/classic" className="site-brand">
           <Text size="5" weight="bold">
             Kevin James
           </Text>

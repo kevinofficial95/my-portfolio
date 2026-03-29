@@ -134,7 +134,7 @@ export default function Home() {
                   </a>
                 </Button>
                 <Button asChild variant="outline" size="3">
-                  <Link to="/contact">
+                  <Link to="/classic/contact">
                     Let&apos;s Connect
                     <ArrowRight size={16} />
                   </Link>

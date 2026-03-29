@@ -14,13 +14,15 @@ export function useScroll(onProgress: (progress: number) => void): void {
     });
 
     lenisRef.current = lenis;
-
-    const totalHeight = document.body.scrollHeight - window.innerHeight;
+    const getTotalHeight = () =>
+      Math.max(document.documentElement.scrollHeight - window.innerHeight, 1);
 
     lenis.on("scroll", ({ scroll }: { scroll: number }) => {
-      const progress = totalHeight > 0 ? scroll / totalHeight : 0;
+      const progress = scroll / getTotalHeight();
       onProgress(Math.max(0, Math.min(1, progress)));
     });
+
+    onProgress(window.scrollY / getTotalHeight());
 
     function raf(time: number): void {
       lenis.raf(time);

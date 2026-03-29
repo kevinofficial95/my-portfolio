@@ -1,169 +1,126 @@
-import { useRef, useEffect } from "react";
-import { getMasterTimeline } from "./timeline";
-
-interface Section {
-  label: string;
-  subtitle: string;
-  description: string;
-  progress: number;
-}
-
-const sections: Section[] = [
-  {
-    label: "Intro",
-    subtitle: "Welcome",
-    description: "A cinematic journey through my work",
-    progress: 0,
-  },
-  {
-    label: "About",
-    subtitle: "Who I Am",
-    description: "Full-stack developer passionate about creative experiences",
-    progress: 0.33,
-  },
-  {
-    label: "Projects",
-    subtitle: "My Work",
-    description: "Building immersive digital products with modern technology",
-    progress: 0.66,
-  },
-  {
-    label: "Contact",
-    subtitle: "Get In Touch",
-    description: "Let's create something amazing together",
-    progress: 1,
-  },
-];
+import { useMemo } from "react";
+import { ArrowUpRight, Download } from "lucide-react";
+import { getActiveBeat, storyBeats } from "./story";
 
 interface OverlayUIProps {
   scrollProgress: number;
 }
 
 export default function OverlayUI({ scrollProgress }: OverlayUIProps) {
-  const sectionRefs = useRef<(HTMLDivElement | null)[]>([]);
-
-  useEffect(() => {
-    const tl = getMasterTimeline();
-    const progress = tl.progress();
-    sectionRefs.current.forEach((el, i) => {
-      if (!el) return;
-      const sectionProgress = sections[i].progress;
-      const distance = Math.abs(progress - sectionProgress);
-      const opacity = Math.max(0, 1 - distance * 6);
-      const translateY = (progress - sectionProgress) * -80;
-      el.style.opacity = String(opacity);
-      el.style.transform = `translateY(${translateY}px)`;
-    });
-  }, [scrollProgress]);
+  const activeIndex = useMemo(
+    () => getActiveBeat(scrollProgress),
+    [scrollProgress]
+  );
 
   return (
-    <div
-      style={{
-        position: "fixed",
-        inset: 0,
-        zIndex: 10,
-        pointerEvents: "none",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "flex-start",
-        padding: "0 8vw",
-      }}
-    >
-      {sections.map((section, i) => (
-        <div
-          key={section.label}
-          ref={(el) => {
-            sectionRefs.current[i] = el;
-          }}
-          style={{
-            position: "absolute",
-            opacity: i === 0 ? 1 : 0,
-            transition: "opacity 0.1s, transform 0.1s",
-            color: "#ffffff",
-            maxWidth: "480px",
-          }}
-        >
-          <p
-            style={{
-              fontSize: "0.85rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "#4ecdc4",
-              marginBottom: "0.5rem",
-              fontFamily: "monospace",
-            }}
-          >
-            {section.subtitle}
-          </p>
-          <h2
-            style={{
-              fontSize: "clamp(2rem, 5vw, 4rem)",
-              fontWeight: 700,
-              lineHeight: 1.1,
-              marginBottom: "1rem",
-              textShadow: "0 2px 20px rgba(0,0,0,0.5)",
-            }}
-          >
-            {section.label}
-          </h2>
-          <p
-            style={{
-              fontSize: "1.1rem",
-              lineHeight: 1.6,
-              color: "rgba(255,255,255,0.8)",
-              textShadow: "0 1px 10px rgba(0,0,0,0.5)",
-            }}
-          >
-            {section.description}
-          </p>
+    <div className="story-overlay">
+      <div className="story-topbar">
+        <div>
+          <span className="story-wordmark">Kevin James</span>
+          <span className="story-role">Software Engineer</span>
         </div>
-      ))}
+        <div className="story-topbar-links">
+          <a href="/Kevin_James_CV.html" target="_blank" rel="noreferrer">
+            CV
+          </a>
+          <a href="/classic">Classic</a>
+        </div>
+      </div>
 
-      <div
-        style={{
-          position: "fixed",
-          right: "4vw",
-          top: "50%",
-          transform: "translateY(-50%)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "12px",
-        }}
-      >
-        {sections.map((section, i) => {
-          const active =
-            Math.abs(scrollProgress - section.progress) <
-            1 / (sections.length * 2);
+      <div className="story-copy">
+        {storyBeats.map((beat, index) => {
+          const distance = Math.abs(scrollProgress - beat.progress);
+          const opacity = Math.max(0, 1 - distance * 5.4);
+          const translateY = (scrollProgress - beat.progress) * -120;
+
           return (
-            <div
-              key={`dot-${i}`}
+            <article
+              key={beat.id}
+              className="story-copy-card"
               style={{
-                width: active ? "10px" : "6px",
-                height: active ? "10px" : "6px",
-                borderRadius: "50%",
-                background: active ? "#4ecdc4" : "rgba(255,255,255,0.4)",
-                transition: "all 0.3s ease",
+                opacity,
+                transform: `translateY(${translateY}px)`,
+                pointerEvents: index === activeIndex ? "auto" : "none",
               }}
-            />
+            >
+              <p className="story-eyebrow">{beat.eyebrow}</p>
+              <h1>{beat.title}</h1>
+              <p className="story-description">{beat.description}</p>
+              <div className="story-meta">
+                {beat.meta.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </div>
+
+              {beat.id === "intro" && (
+                <div className="story-actions">
+                  <a href="#story-contact" className="story-button story-button-solid">
+                    Ride to the skyline
+                    <ArrowUpRight size={16} />
+                  </a>
+                  <a
+                    href="/Kevin_James_CV.html"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="story-button story-button-ghost"
+                  >
+                    View CV
+                    <Download size={16} />
+                  </a>
+                </div>
+              )}
+
+              {beat.id === "contact" && (
+                <div id="story-contact" className="story-actions">
+                  <a
+                    href="mailto:kevinofficial95@gmail.com"
+                    className="story-button story-button-solid"
+                  >
+                    Email Me
+                    <ArrowUpRight size={16} />
+                  </a>
+                  <a
+                    href="https://github.com/kevinofficial95"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="story-button story-button-ghost"
+                  >
+                    GitHub
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/kevinjames95"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="story-button story-button-ghost"
+                  >
+                    LinkedIn
+                  </a>
+                </div>
+              )}
+            </article>
           );
         })}
       </div>
 
+      <div className="story-progress-rail" aria-label="Story progress">
+        {storyBeats.map((beat, index) => (
+          <div key={beat.id} className="story-progress-item">
+            <span
+              className={index === activeIndex ? "is-active" : ""}
+              style={{
+                opacity: scrollProgress >= beat.progress ? 1 : 0.35,
+              }}
+            />
+            <small>{beat.eyebrow}</small>
+          </div>
+        ))}
+      </div>
+
       <div
-        style={{
-          position: "fixed",
-          bottom: "4vh",
-          left: "50%",
-          transform: "translateX(-50%)",
-          color: "rgba(255,255,255,0.5)",
-          fontSize: "0.75rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          opacity: scrollProgress < 0.05 ? 1 : 0,
-          transition: "opacity 0.5s ease",
-        }}
+        className="story-scroll-hint"
+        style={{ opacity: scrollProgress < 0.08 ? 1 : 0 }}
       >
-        Scroll to explore
+        Scroll to ride through the city
       </div>
     </div>
   );

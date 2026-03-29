@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap");
 
 * {
   margin: 0;
@@ -24,7 +24,7 @@ body,
 }
 
 body {
-  font-family: "Manrope", sans-serif;
+  font-family: "Space Grotesk", sans-serif;
   background: var(--gray-1);
   color: var(--gray-12);
   transition: background 0.3s ease, color 0.3s ease;
